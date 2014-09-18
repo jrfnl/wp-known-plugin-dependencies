@@ -602,7 +602,7 @@ if ( ! class_exists( 'Known_Plugin_Dependencies' ) ) {
 		 * @return array
 		 */
 		public static function add_known_dependencies( $plugins ) {
-			if( method_exists( 'Plugin_Dependencies', 'data_safe_plugin_merge' ) ) {
+			if ( method_exists( 'Plugin_Dependencies', 'data_safe_plugin_merge' ) ) {
 				return Plugin_Dependencies::data_safe_plugin_merge( $plugins, self::$list );
 			}
 			else {
