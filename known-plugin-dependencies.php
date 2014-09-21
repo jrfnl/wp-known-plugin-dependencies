@@ -665,6 +665,7 @@ if ( ! class_exists( 'Known_Plugin_Dependencies' ) ) {
 								$result[ $file_slug ] = array_merge( $minimum, $data );
 							}
 							elseif ( $result[ $file_slug ]['Name'] === $data['Name'] )	{
+								$result[ $file_slug ] = array_merge( $minimum, $result[ $file_slug ] );
 								if ( ! empty( $data['Depends'] ) ) {
 									$result[ $file_slug ]['Depends']  = self::merge_unique_comma_del_string( $result[ $file_slug ]['Depends'], $data['Depends'] );
 								}
