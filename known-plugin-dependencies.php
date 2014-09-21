@@ -34,8 +34,13 @@ if ( ! is_admin() ) {
 
 if ( ! class_exists( 'Known_Plugin_Dependencies' ) ) {
 	class Known_Plugin_Dependencies {
-
 		static $list = array(
+			'known-plugin-dependencies/known-plugin-dependencies.php' => array(
+				'Name'     => 'Known Plugin Dependencies',
+				'Provides' => '',
+				'Depends'  => 'Plugin Dependencies',
+			),
+
 			/**
 			 * Debug Bar add-ons
 			 */
