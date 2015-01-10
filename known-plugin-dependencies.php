@@ -28,11 +28,7 @@ if ( ! function_exists( 'add_action' ) ) {
 	exit();
 }
 
-if ( ! is_admin() ) {
-	return;
-}
-
-if ( ! class_exists( 'Known_Plugin_Dependencies' ) ) {
+if ( is_admin() && ! class_exists( 'Known_Plugin_Dependencies' ) ) {
 	class Known_Plugin_Dependencies {
 		static $list = array(
 			'known-plugin-dependencies/known-plugin-dependencies.php' => array(
