@@ -35,6 +35,6 @@ Rather than having individual developers create their own lists to enrich the av
 The ultimate goal is for the `Depends` tag to be widely adopted and this plugin to become obsolete.
 
 
-Of course, it would also help **a lot** if the Depends/Provides tags would be officially recognized and mentioned in the [Plugin Developers FAQ](http://wordpress.org/plugins/about/faq/) and if what's expected to be at the top of the main .php file would be as well documented as the readme.txt file in the [Developer Center](http://wordpress.org/plugins/about/), but that's a whole other challenge ;-)
+Of course, it would also help **a lot** if the Depends/Provides tags would be officially recognized and mentioned in the [Plugin Developers FAQ](https://developer.wordpress.org/plugins/wordpress-org/plugin-developer-faq/) and if what's expected to be at the top of the main .php file would be as well documented as the readme.txt file in the [Developer Center](https://wordpress.org/plugins/developers/), but that's a whole other challenge ;-)
 
 Any lobbying you can do for this will of course be encouraged and applauded!
