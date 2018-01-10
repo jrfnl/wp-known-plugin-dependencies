@@ -2,23 +2,23 @@
 /**
  * Known Plugin Dependencies
  *
- * @package 	WordPress\Plugins\Known_Plugin_Dependencies
- * @author		Juliette Reinders Folmer <wpplugins_nospam@adviesenzo.nl>
- * @link		https://github.com/jrfnl/wp-known-plugin-dependencies
- * @version 	0.1
+ * @package     WordPress\Plugins\Known_Plugin_Dependencies
+ * @author      Juliette Reinders Folmer <wpplugins_nospam@adviesenzo.nl>
+ * @link        https://github.com/jrfnl/wp-known-plugin-dependencies
+ * @version     0.1
  *
- * @copyright	2014 Juliette Reinders Folmer
- * @license 	http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher
+ * @copyright   2014 Juliette Reinders Folmer
+ * @license     http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher
  *
  * @wordpress-plugin
  * Plugin Name: Known Plugin Dependencies
- * Plugin URI:	http://wordpress.org/plugins/known-plugin-dependencies/
+ * Plugin URI:  http://wordpress.org/plugins/known-plugin-dependencies/
  * Description: Add-on for the Plugin Dependencies plugin. Enrich available plugin dependency information.
- * Version: 	0.1
- * Author:		Juliette Reinders Folmer
- * Author URI:	http://www.adviesenzo.nl/
- * Depends: 	Plugin Dependencies
- * Copyright:	2014 Juliette Reinders Folmer
+ * Version:     0.1
+ * Author:      Juliette Reinders Folmer
+ * Author URI:  http://www.adviesenzo.nl/
+ * Depends:     Plugin Dependencies
+ * Copyright:   2014 Juliette Reinders Folmer
  */
 
 // Avoid direct calls to this file
@@ -30,7 +30,7 @@ if ( ! function_exists( 'add_action' ) ) {
 
 if ( is_admin() && ! class_exists( 'Known_Plugin_Dependencies' ) ) {
 	class Known_Plugin_Dependencies {
-		static $list = array(
+		public static $list = array(
 			'known-plugin-dependencies/known-plugin-dependencies.php' => array(
 				'Name'     => 'Known Plugin Dependencies',
 				'Provides' => '',
@@ -605,8 +605,7 @@ if ( is_admin() && ! class_exists( 'Known_Plugin_Dependencies' ) ) {
 		public static function add_known_dependencies( $plugins ) {
 			if ( method_exists( 'Plugin_Dependencies', 'data_safe_plugin_merge' ) ) {
 				return Plugin_Dependencies::data_safe_plugin_merge( $plugins, self::$list );
-			}
-			else {
+			} else {
 				return self::data_safe_plugin_merge( $plugins, self::$list );
 			}
 		}
@@ -621,16 +620,16 @@ if ( is_admin() && ! class_exists( 'Known_Plugin_Dependencies' ) ) {
 		 * <code>
 		 * <?php
 		 * function add_my_dependencies( $plugins ) {
-		 *		/* Data format for $myplugins - extraneous information will be ignored:
-		 *		array(
-		 *			'plugin-dir/file.php' => array(
-		 *				'Name' => 'Plugin name',
-		 *				'Provides' => '',
-		 *				'Depends' => '',
-		 *			)
-		 *		)* /
-		 *		$myplugins = some_function_getting_a_plugins_array();
-		 *		return Plugin_Dependencies::data_safe_plugin_merge( $plugins, $my_plugins );
+		 *    /* Data format for $myplugins - extraneous information will be ignored:
+		 *    array(
+		 *        'plugin-dir/file.php' => array(
+		 *            'Name' => 'Plugin name',
+		 *            'Provides' => '',
+		 *            'Depends' => '',
+		 *        )
+		 *    )* /
+		 *    $myplugins = some_function_getting_a_plugins_array();
+		 *    return Plugin_Dependencies::data_safe_plugin_merge( $plugins, $my_plugins );
 		 * }
 		 * add_filter( 'plugin_dependencies_all_plugins', 'add_my_dependencies' );
 		 * ?>
@@ -659,12 +658,14 @@ if ( is_admin() && ! class_exists( 'Known_Plugin_Dependencies' ) ) {
 						foreach ( $array as $file_slug => $data ) {
 							if ( ! isset( $result[ $file_slug ] ) ) {
 								$result[ $file_slug ] = array_merge( $minimum, $data );
-							}
-							elseif ( $result[ $file_slug ]['Name'] === $data['Name'] )	{
+
+							} elseif ( $result[ $file_slug ]['Name'] === $data['Name'] ) {
 								$result[ $file_slug ] = array_merge( $minimum, $result[ $file_slug ] );
+
 								if ( ! empty( $data['Depends'] ) ) {
-									$result[ $file_slug ]['Depends']  = self::merge_unique_comma_del_string( $result[ $file_slug ]['Depends'], $data['Depends'] );
+									$result[ $file_slug ]['Depends'] = self::merge_unique_comma_del_string( $result[ $file_slug ]['Depends'], $data['Depends'] );
 								}
+
 								if ( ! empty( $data['Provides'] ) ) {
 									$result[ $file_slug ]['Provides'] = self::merge_unique_comma_del_string( $result[ $file_slug ]['Provides'], $data['Provides'] );
 								}

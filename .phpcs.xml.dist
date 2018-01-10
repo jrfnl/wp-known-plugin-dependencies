@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<ruleset name="WordPress Coding Standards for Plugins">
+	<description>Generally-applicable sniffs for WordPress plugins</description>
+
+	<arg value="sp"/>
+
+	<file>known-plugin-dependencies.php</file>
+
+
+	<!--
+	#############################################################################
+	SNIFF AGAINST THE WordPress RULESET
+	Exclude a few select sniffs/errorcodes for specific reasons and
+	add configuration for a sniff.
+	#############################################################################
+	-->
+	<rule ref="WordPress-Extra">
+		<exclude name="Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines"/>
+
+		<!-- No need for this sniff as the travis script includes linting. -->
+		<exclude name="Generic.PHP.Syntax"/>
+
+		<!-- Demanding Yoda conditions is stupid. -->
+		<exclude name="WordPress.PHP.YodaConditions"/>
+	</rule>
+
+	<!-- The value of the below config variable should be in-line with the
+		 "requires at least" version in the readme. -->
+	<config name="minimum_supported_wp_version" value="3.1"/>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array" value="Known_Plugin_Dependencies" />
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.Arrays.MultipleStatementAlignment">
+		<properties>
+			<property name="exact" value="false"/>
+			<property name="alignMultilineItems" value="!=100"/>
+			<property name="ignoreNewlines" value="false"/>
+		</properties>
+	</rule>
+
+	<!-- Renaming the main file after publication would deactivate the plugin. -->
+	<rule ref="WordPress.Files.FileName">
+		<properties>
+			<property name="strict_class_file_names" value="false" />
+		</properties>
+	</rule>
+
+
+	<!--
+	#############################################################################
+	SNIFF FOR PHP CROSS-VERSION COMPATIBILITY
+	Exclude a few select errorcodes for things back-filled by WP Core.
+	#############################################################################
+	-->
+
+	<config name="testVersion" value="5.2-99.0"/>
+	<rule ref="PHPCompatibility">
+		<!-- Whitelist PHP native classes, interfaces, functions and constants which
+			 are back-filled by WP.
+
+			 Based on:
+			 * /wp-includes/compat.php
+			 * /wp-includes/random_compat/random.php
+		-->
+		<exclude name="PHPCompatibility.PHP.NewClasses.errorFound"/>
+		<exclude name="PHPCompatibility.PHP.NewClasses.typeerrorFound"/>
+
+		<exclude name="PHPCompatibility.PHP.NewConstants.json_pretty_printFound"/>
+		<exclude name="PHPCompatibility.PHP.NewConstants.php_version_idFound"/>
+
+		<exclude name="PHPCompatibility.PHP.NewFunctions.hash_equalsFound"/>
+		<exclude name="PHPCompatibility.PHP.NewFunctions.json_last_error_msgFound"/>
+		<exclude name="PHPCompatibility.PHP.NewFunctions.random_intFound"/>
+		<exclude name="PHPCompatibility.PHP.NewFunctions.random_bytesFound"/>
+		<exclude name="PHPCompatibility.PHP.NewFunctions.array_replace_recursiveFound"/>
+
+		<exclude name="PHPCompatibility.PHP.NewInterfaces.jsonserializableFound"/>
+	</rule>
+
+	<!-- Whitelist the WP Core mysql_to_rfc3339() function. -->
+	<rule ref="PHPCompatibility.PHP.RemovedExtensions">
+		<properties>
+			<property name="functionWhitelist" type="array" value="mysql_to_rfc3339"/>
+		</properties>
+	</rule>
+
+</ruleset>
