@@ -6,7 +6,47 @@
 
 	<file>known-plugin-dependencies.php</file>
 
-	<rule ref="WordPress-Extra" />
 
+	<!--
+	#############################################################################
+	SNIFF AGAINST THE WordPress RULESET
+	Exclude a few select sniffs/errorcodes for specific reasons and
+	add configuration for a sniff.
+	#############################################################################
+	-->
+	<rule ref="WordPress-Extra">
+		<exclude name="Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines"/>
+
+		<!-- No need for this sniff as the travis script includes linting. -->
+		<exclude name="Generic.PHP.Syntax"/>
+
+		<!-- Demanding Yoda conditions is stupid. -->
+		<exclude name="WordPress.PHP.YodaConditions"/>
+	</rule>
+
+	<!-- The value of the below config variable should be in-line with the
+		 "requires at least" version in the readme. -->
+	<config name="minimum_supported_wp_version" value="3.1"/>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array" value="Known_Plugin_Dependencies" />
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.Arrays.MultipleStatementAlignment">
+		<properties>
+			<property name="exact" value="false"/>
+			<property name="alignMultilineItems" value="!=100"/>
+			<property name="ignoreNewlines" value="false"/>
+		</properties>
+	</rule>
+
+	<!-- Renaming the main file after publication would deactivate the plugin. -->
+	<rule ref="WordPress.Files.FileName">
+		<properties>
+			<property name="strict_class_file_names" value="false" />
+		</properties>
+	</rule>
 
 </ruleset>
