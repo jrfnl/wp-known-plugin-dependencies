@@ -85,8 +85,18 @@ if ( is_admin() && ! class_exists( 'Known_Plugin_Dependencies' ) ) {
 				'Provides' => '',
 				'Depends'  => 'Debug Bar',
 			),
+			'debug-bar-localization/debug-bar-localization.php' => array(
+				'Name'     => 'Debug Bar Post Meta',
+				'Provides' => '',
+				'Depends'  => 'Debug Bar',
+			),
 			'debug-my-plugin/debug-my-plugin.php' => array(
 				'Name'     => 'Debug My Plugin',
+				'Provides' => '',
+				'Depends'  => 'Debug Bar',
+			),
+			'debug-bar-plugin-activation/debug-bar-plugin-activation.php' => array(
+				'Name'     => 'Debug Bar Plugin Activation',
 				'Provides' => '',
 				'Depends'  => 'Debug Bar',
 			),
@@ -147,6 +157,11 @@ if ( is_admin() && ! class_exists( 'Known_Plugin_Dependencies' ) ) {
 			),
 			'debug-bar-super-globals/debug-bar-super-globals.php' => array(
 				'Name'     => 'Debug Bar Super Globals',
+				'Provides' => '',
+				'Depends'  => 'Debug Bar',
+			),
+			'debug-bar-taxonomies/debug-bar-taxonomies.php' => array(
+				'Name'     => 'Debug Bar Taxonomies',
 				'Provides' => '',
 				'Depends'  => 'Debug Bar',
 			),
