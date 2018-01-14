@@ -1,0 +1,5 @@
+.idea/*
+/vendor/
+.phpcs.xml
+phpcs.xml
+phpunit.xml
