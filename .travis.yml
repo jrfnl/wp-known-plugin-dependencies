@@ -27,6 +27,9 @@ matrix:
           dist: precise
 
 before_install:
+  # Speed up build time by disabling Xdebug when its not needed.
+  - phpenv config-rm xdebug.ini
+  # Set up temporary paths.
   - export PHPCS_DIR=/tmp/phpcs
   - export WPCS_DIR=/tmp/wpcs
   - export PHPCOMPAT_DIR=/tmp/phpcompatibility
